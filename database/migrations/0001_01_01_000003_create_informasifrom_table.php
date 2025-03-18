@@ -28,8 +28,8 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
-        Schema::dropIfExists('informasi_form');
-    }
+    // public function down(): void
+    // {
+    //     Schema::dropIfExists('informasi_form');
+    // }
 };
