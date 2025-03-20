@@ -14,7 +14,16 @@ Route::get('/dashboard', function () {
 Route::get('/tenagakerja', function () {
     return view('pages.tenagakerja.index');
 });
-
+Route::get('/tenagakerja/listrt', function () {
+    return view('pages.tenagakerja.listrt');
+});
+    for ($i = 1; $i <= 24; $i++) {
+        Route::get("/tenagakerja/listrt/{$i}", function () use ($i) {
+            return view("pages.tenagakerja.listrt.{$i}");
+        });
+    }
+    
+        
 // menu jamsos
 Route::get('/jamsos', function () {
     return view('pages.jamsos.index');

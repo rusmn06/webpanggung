@@ -1,15 +1,12 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
                 <div class="sidebar-brand-text mx-3">SID Panggung</div>
             </a>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-1">
-
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashborad">
+            <!-- <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard"> -->
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -21,7 +18,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="dashboard">
+                <a class="nav-link" href="/dashboard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -36,21 +33,21 @@
 
             <!-- Nav Item - Kuisener Tenaga Kerja -->
             <li class="nav-item">
-                <a class="nav-link" href="tenagakerja">
+                <a class="nav-link" href="/tenagakerja">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Kuisener Tenaga Kerja</span></a>
             </li>
 
             <!-- Nav Item - Kuisener Jamsos -->
             <li class="nav-item">
-                <a class="nav-link" href="jamsos">
+                <a class="nav-link" href="/jamsos">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Kuisener Jamsos</span></a>
             </li>
 
             <!-- Nav Item - Kuisener Difabel Rentan -->
             <li class="nav-item">
-                <a class="nav-link" href="difabelrentan">
+                <a class="nav-link" href="/difabelrentan">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Kuisener Difabel Rentan</span></a>
             </li>

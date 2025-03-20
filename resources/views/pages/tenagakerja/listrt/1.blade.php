@@ -20,6 +20,9 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('template/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
+    <!-- Custom styles for this page -->
+    <link href="{{ asset('template/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+
 </head>
 
 <body id="page-top">
@@ -51,57 +54,36 @@
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
                     </div>
 
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-0">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-sm font-weight-bold text-primary text-uppercase mb-2">
-                                                Earnings (Monthly)</div>
-                                        </div>
-                                    </div>
-                                    <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-sm font-weight-bold text-success text-uppercase mb-1">
-                                                Earnings (Annual)</div>
-                                        </div>
-                                    </div>
-                                    <a href="/tenagakerja/listrt" class="btn btn-primary btn-sm">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-
+                    <!-- Back -->
+                    <div class="d-sm-flex justify-content-end mb-2">
+                        <a href="/tenagakerja/listrt" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Kembali</a>
                     </div>
 
-                    <!-- Content Row -->
-
-                    <div class="row">
-
-                        <!-- Area Chart -->
-                        <div class="col-xl-8 col-lg-8">
-                            <div class="card shadow mb-4">
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-bar">
-                                        <canvas id="myBarChart"></canvas>
-                                    </div>
-                                </div>
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Position</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Tiger Nixon</td>
+                                            <td>System Architect</td>
+                                            <td>System Architect</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                        </div>   
-
+                        </div>
                     </div>
 
                 </div>
@@ -156,11 +138,11 @@
     <script src="{{ asset('template/js/sb-admin-2.min.js') }}"></script>
 
     <!-- Page level plugins -->
-    <script src="{{ asset('template/vendor/chart.js/Chart.min.js') }}"></script>
+    <script src="{{ asset('template/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('template/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
     <!-- Page level custom scripts -->
-    <script src="{{ asset('template/js/demo/chart-bar-demo.js') }}"></script>
-    <script src="{{ asset('template/js/demo/chart-pie-demo.js') }}"></script>
+    <script src="{{ asset('template/js/demo/datatables-demo.js') }}"></script>
 
 </body>
 
