@@ -3,31 +3,105 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserTenagaKerjaController;
+use App\Http\Controllers\TenagaKerjaWizardController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\TenagaKerjaVerifController;
+use App\Http\Controllers\JamsosWizardController;
 
-// Public route untuk halaman awal
+/*
+|--------------------------------------------------------------------------
+| Public & Auth Routes
+|--------------------------------------------------------------------------
+*/
+
+// Halaman depan (home)
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Auth routes (login & register)
+// Hanya untuk tamu (guest): login & register
 Route::middleware('guest')->group(function () {
-    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-    Route::post('/login', [LoginController::class, 'login']);
+    Route::get('/login',    [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login',   [LoginController::class, 'login']);
     Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-    Route::post('/register', [RegisterController::class, 'register']);
+    Route::post('/register',[RegisterController::class, 'register']);
 });
 
-// Logout
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
+// Logout (harus sudah auth)
+Route::post('/logout', [LoginController::class, 'logout'])
+     ->name('logout')
+     ->middleware('auth');
 
-// Admin routes — prioritas utama
-Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-    // admin routes lainnya...
-});
 
-// User routes — prioritas utama
-Route::middleware(['auth', 'role:user'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-});
+/*
+|--------------------------------------------------------------------------
+| Admin Routes
+|--------------------------------------------------------------------------
+*/
+Route::prefix('admin')
+     ->name('admin.')
+     ->middleware(['auth', 'role:admin'])
+     ->group(function () {
+         // Dashboard admin
+         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+
+         // Verifikasi tenaga kerja
+         Route::prefix('tenagakerja')
+              ->name('tkw.')
+              ->group(function () {
+                  Route::get('/',               [TenagaKerjaVerifController::class, 'index'])->name('index');
+                  Route::get('{id}',            [TenagaKerjaVerifController::class, 'show'])->name('show');
+                  Route::post('{id}/approve',  [TenagaKerjaVerifController::class, 'approve'])->name('approve');
+                  Route::post('{id}/reject',    [TenagaKerjaVerifController::class, 'reject'])->name('reject');
+              });
+
+         // (Tambahkan route admin lainnya di sini…)
+     });
+
+
+/*
+|--------------------------------------------------------------------------
+| User Routes
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'role:user|admin'])->group(function () {
+         // Dashboard user
+         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+         // Menu Tenaga Kerja (user-facing)
+         Route::get('/tenagakerja',           [UserTenagaKerjaController::class, 'index'])->name('tenagakerja.index');
+         Route::get('/tenagakerja/listrt',    [UserTenagaKerjaController::class, 'listrt'])->name('tenagakerja.listrt');
+         for ($i = 1; $i <= 24; $i++) {
+             Route::get("/tenagakerja/listrt/{$i}", [UserTenagaKerjaController::class, 'rtview'])
+                  ->name("tenagakerja.listrt.{$i}")
+                  ->defaults('rt', $i);
+         }
+
+         // Wizard Tenaga Kerja
+         Route::prefix('tenagakerja')
+              ->name('tkw.')
+              ->group(function () {
+                  Route::get('step-1', [TenagaKerjaWizardController::class, 'showStep1'])->name('step1');
+                  Route::post('step-1',[TenagaKerjaWizardController::class, 'postStep1']);
+                  Route::get('step-2', [TenagaKerjaWizardController::class, 'showStep2'])->name('step2');
+                  Route::post('step-2',[TenagaKerjaWizardController::class, 'postStep2']);
+                  Route::get('step-3', [TenagaKerjaWizardController::class, 'showStep3'])->name('step3');
+                  Route::post('step-3',[TenagaKerjaWizardController::class, 'postStep3']);
+                  Route::get('step-4', [TenagaKerjaWizardController::class, 'showStep4'])->name('step4');
+                  Route::post('step-4',[TenagaKerjaWizardController::class, 'postStep4']);
+              });
+
+         // Menu Jamsos
+         Route::get('/jamsos', function () {
+             return view('pages.jamsos.index');
+         });
+
+         // (Buka kembali wizard Jamsos bila diperlukan)
+         // Route::prefix('jamsos')->name('jss.')->group(…);
+
+         // Menu Difabel Rentan
+         Route::get('/difabelrentan', function () {
+             return view('pages.difabelrentan.index');
+         });
+     });

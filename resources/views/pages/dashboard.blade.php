@@ -1,14 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('title', 'Dashboard - SID Panggung')
 
 @section('content')
 
+<!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-        <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
-    </a>
+        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
 </div>
 
 @if(auth()->user()->role == 'admin')
@@ -154,7 +154,16 @@
 
 @endsection
 
-@section('scripts')
-<script src="{{ asset('template/js/demo/chart-bar-demo.js') }}"></script>
-<script src="{{ asset('template/js/demo/chart-pie-demo.js') }}"></script>
-@endsection
+@push('scripts')
+    <!-- Core plugin JavaScript-->
+    <script src="{{ asset('template/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <!-- SB Admin 2 JS -->
+    <script src="{{ asset('template/js/sb-admin-2.min.js') }}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{{ asset('template/vendor/chart.js/Chart.min.js') }}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{ asset('template/js/demo/chart-bar-demo.js') }}"></script>
+    <script src="{{ asset('template/js/demo/chart-pie-demo.js') }}"></script>
+@endpush
