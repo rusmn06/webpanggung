@@ -24,7 +24,7 @@ class UserController extends Controller
     {
         $data = $request->validate([
             'name'                  => 'required|string|max:255',
-            'email'                 => 'required|email|unique:users,email',
+            'username'              => 'required|string|max:255|unique:users,username',
             'password'              => 'required|min:6|confirmed',
         ]);
 
@@ -46,25 +46,25 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        $user = User::where('role','user')->findOrFail($id);
+    $user = User::where('role','user')->findOrFail($id);
 
-        $data = $request->validate([
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:users,email,' . $id,
-            'password' => 'nullable|min:6|confirmed',
-        ]);
+    $data = $request->validate([
+        'name'     => 'required|string|max:255',
+        'username' => 'required|string|max:255|unique:users,username,'.$id.',id',
+        'password' => 'nullable|min:6|confirmed',
+    ]);
 
-        if ($data['password']) {
-            $data['password'] = Hash::make($data['password']);
-        } else {
-            unset($data['password']);
-        }
+    if ($request->filled('password')) {
+        $data['password'] = Hash::make($data['password']);
+    } else {
+        unset($data['password']);
+    }
 
-        $user->update($data);
+    $user->update($data);
 
-        return redirect()
-            ->route('admin.user.index')
-            ->with('success', 'User berhasil diupdate.');
+    return redirect()
+        ->route('admin.user.index')
+        ->with('success', 'User berhasil diupdate.');
     }
 
     public function destroy($id)

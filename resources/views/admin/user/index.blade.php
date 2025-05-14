@@ -27,7 +27,7 @@
                     <thead>
                         <tr>
                             <th>Nama</th>
-                            <th>Username / Email</th>
+                            <th>Username</th>
                             <th>Role</th>
                             <th>Aksi</th>
                         </tr>

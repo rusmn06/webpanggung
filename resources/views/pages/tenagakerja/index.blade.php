@@ -24,7 +24,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-sm font-weight-bold text-primary text-uppercase mb-2">
-                                Earnings (Monthly)
+                                Isi Data
                             </div>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-sm font-weight-bold text-success text-uppercase mb-1">
-                                Earnings (Annual)
+                                Lihat Data
                             </div>
                         </div>
                     </div>
