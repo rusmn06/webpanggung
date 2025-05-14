@@ -31,6 +31,7 @@ class LoginController extends Controller
             return redirect()->intended('/dashboard');
         }
         
+        // Bagian yang diubah hanya ini:
         $user = \App\Models\User::where('username', $request->username)->first();
         
         if (!$user) {

@@ -35,17 +35,9 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <div class="input-group">
-                                                <input type="password" class="form-control form-control-user @error('password') is-invalid @enderror"
-                                                       id="password" name="password" placeholder="Password" required>
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text bg-white border-left-0">
-                                                        <a href="#" id="toggle-password" class="text-secondary"><i class="fas fa-eye"></i></a>
-                                                    </span>
-                                                </div>
-                                            </div>
+                                            <input type="password" class="form-control form-control-user @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password" required>
                                             @error('password')
-                                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="form-group">
@@ -75,25 +67,9 @@
 
     <script src="{{ asset('template/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('template/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
     <script src="{{ asset('template/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('template/js/sb-admin-2.min.js') }}"></script>
-
-    <script>
-        document.getElementById('toggle-password').addEventListener('click', function (e) {
-            e.preventDefault();
-            const passwordInput = document.getElementById('password');
-            const icon = this.querySelector('i');
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                passwordInput.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
-        });
-    </script>
 </body>
 
 </html>

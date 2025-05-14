@@ -40,6 +40,7 @@
                 <img class="img-profile rounded-circle"
                     src="{{ asset('template/img/undraw_profile.svg') }}">
             </a>
+            <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                 aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">
@@ -56,8 +57,13 @@
                 </a>
                 <div class="dropdown-divider"></div>
 
-                <!-- Tombol trigger modal logout -->
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                <!-- Form logout hidden -->
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+
+                <!-- Logout with confirmation -->
+                <a class="dropdown-item" href="#" onclick="confirmLogout(event)">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                     Logout
                 </a>
@@ -66,25 +72,12 @@
     </ul>
 </nav>
 
-<!-- Modal Logout -->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Yakin ingin logout?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Pilih "Logout" di bawah jika kamu yakin ingin keluar dari sesi ini.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-inline">
-                    @csrf
-                    <button class="btn btn-primary" type="submit">Logout</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- Tambahkan skrip konfirmasi logout -->
+<script>
+    function confirmLogout(event) {
+        event.preventDefault();
+        if (confirm('Apakah Anda yakin ingin logout?')) {
+            document.getElementById('logout-form').submit();
+        }
+    }
+</script>
