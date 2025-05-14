@@ -23,26 +23,17 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-        
+
             if (Auth::user()->role === 'admin') {
                 return redirect()->intended('admin/dashboard');
             }
-        
+
             return redirect()->intended('/dashboard');
         }
-        
-        $user = \App\Models\User::where('username', $request->username)->first();
-        
-        if (!$user) {
-            return back()->withErrors([
-                'username' => 'Username tidak ditemukan.',
-            ])->onlyInput('username');
-        }
-        
+
         return back()->withErrors([
-            'password' => 'Password salah.',
+            'username' => 'Tidak Ada Username Tersebut didalam database kami',
         ])->onlyInput('username');
-        
     }
 
     public function logout(Request $request)

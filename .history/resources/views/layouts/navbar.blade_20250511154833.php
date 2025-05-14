@@ -5,6 +5,20 @@
         <i class="fa fa-bars"></i>
     </button>
 
+    <!-- Topbar Search -->
+    <!-- <form
+        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <div class="input-group">
+            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                    <i class="fas fa-search fa-sm"></i>
+                </button>
+            </div>
+        </div>
+    </form> -->
+
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
 
@@ -14,7 +28,7 @@
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-search fa-fw"></i>
             </a>
-            <!-- Dropdown - Search -->
+            <!-- Dropdown - Messages -->
             <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                 aria-labelledby="searchDropdown">
                 <form class="form-inline mr-auto w-100 navbar-search">
@@ -32,6 +46,14 @@
             </div>
         </li>
 
+        <!-- Nav Item - Alerts -->
+
+
+        <!-- Nav Item - Messages -->
+        
+
+        <!-- <div class="topbar-divider d-none d-sm-block"></div> -->
+
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -40,6 +62,7 @@
                 <img class="img-profile rounded-circle"
                     src="{{ asset('template/img/undraw_profile.svg') }}">
             </a>
+            <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                 aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">
@@ -56,35 +79,16 @@
                 </a>
                 <div class="dropdown-divider"></div>
 
-                <!-- Tombol trigger modal logout -->
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+
+                <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                     Logout
                 </a>
-            </div>
+             </div>
         </li>
     </ul>
-</nav>
 
-<!-- Modal Logout -->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Yakin ingin logout?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Pilih "Logout" di bawah jika kamu yakin ingin keluar dari sesi ini.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-inline">
-                    @csrf
-                    <button class="btn btn-primary" type="submit">Logout</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+</nav>
