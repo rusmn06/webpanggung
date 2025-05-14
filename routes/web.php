@@ -9,6 +9,7 @@ use App\Http\Controllers\UserTenagaKerjaController;
 use App\Http\Controllers\TenagaKerjaWizardController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\TenagaKerjaVerifController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\JamsosWizardController;
 
 /*
@@ -52,11 +53,21 @@ Route::prefix('admin')
               ->group(function () {
                   Route::get('/',               [TenagaKerjaVerifController::class, 'index'])->name('index');
                   Route::get('{id}',            [TenagaKerjaVerifController::class, 'show'])->name('show');
-                  Route::post('{id}/approve',  [TenagaKerjaVerifController::class, 'approve'])->name('approve');
+                  Route::post('{id}/approve',   [TenagaKerjaVerifController::class, 'approve'])->name('approve');
                   Route::post('{id}/reject',    [TenagaKerjaVerifController::class, 'reject'])->name('reject');
               });
 
-         // (Tambahkan route admin lainnya di sini…)
+         // User
+         Route::prefix('user')
+              ->name('user.')
+              ->group(function () {
+                  Route::get('/',            [UserController::class, 'index'])->name('index');
+                  Route::get('/create',      [UserController::class, 'create'])->name('create');
+                  Route::post('/',           [UserController::class, 'store'])->name('store');
+                  Route::get('/{id}/edit',   [UserController::class, 'edit'])->name('edit');
+                  Route::put('/{id}',        [UserController::class, 'update'])->name('update');
+                  Route::delete('/{id}',     [UserController::class, 'destroy'])->name('destroy');
+             });
      });
 
 

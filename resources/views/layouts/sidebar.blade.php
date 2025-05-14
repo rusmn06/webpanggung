@@ -1,17 +1,25 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-    <!-- Brand & Divider tetap muncul untuk semua -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
-        <div class="sidebar-brand-text mx-3">SID Panggung</div>
+    <!-- Brand & Divider -->
+    @php
+    $dashRoute = auth()->user()->role === 'admin'
+                ? route('admin.dashboard')
+                : route('dashboard');
+    $dashActive = request()->is(auth()->user()->role==='admin' ? 'admin/dashboard*' : 'dashboard*');
+    @endphp
+
+    <a class="sidebar-brand d-flex align-items-center justify-content-center"
+    href="{{ $dashRoute }}">
+    <div class="sidebar-brand-text mx-3">SID Panggung</div>
     </a>
     <hr class="sidebar-divider my-0">
 
-    <!-- Dashboard (semua) -->
-    <li class="nav-item {{ request()->is('dashboard*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('dashboard') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span>
-        </a>
+    <!-- Dashboard-->
+    <li class="nav-item {{ $dashActive ? 'active' : '' }}">
+    <a class="nav-link" href="{{ $dashRoute }}">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Dashboard</span>
+    </a>
     </li>
     <hr class="sidebar-divider">
 
@@ -28,11 +36,18 @@
 
     <!-- MENU ADMIN -->
     @if(auth()->user()->role === 'admin')
-
+    <div class="sidebar-heading">Menu Manajemen</div>
         <li class="nav-item {{ request()->is('tenagakerja*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('tenagakerja.index') }}">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Kuesioner Tenaga Kerja</span>
+            </a>
+        </li>
+
+        <li class="nav-item {{ request()->is('admin/user*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('admin.user.index') }}">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Manajemen Akun</span>
             </a>
         </li>
     
