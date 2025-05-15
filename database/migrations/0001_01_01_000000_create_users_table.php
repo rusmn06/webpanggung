@@ -15,6 +15,7 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->enum('role', ['admin', 'user'])->default('user');
+            $table->string('avatar')->nullable();
             $table->rememberToken();
             // $table->timestamp('email_verified_at')->nullable(); // jika verifikasi email
             $table->timestamps();
@@ -37,6 +38,7 @@ class CreateUsersTable extends Migration
             $table->integer('last_activity')->index();
             $table->timestamps();
         });
+
     }
 
     public function down()
@@ -44,5 +46,6 @@ class CreateUsersTable extends Migration
         Schema::dropIfExists('sessions');
         Schema::dropIfExists('password_resets');
         Schema::dropIfExists('users');
+        Schema::dropIfExists('avatar');
     }
 }

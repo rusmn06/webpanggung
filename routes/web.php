@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\TenagaKerjaVerifController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\JamsosWizardController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -116,3 +117,18 @@ Route::middleware(['auth', 'role:user|admin'])->group(function () {
              return view('pages.difabelrentan.index');
          });
      });
+
+
+Route::middleware(['auth'])->group(function () {
+    // Profile
+    Route::get('/profile', [ProfileController::class, 'show'])
+             ->name('profile.show');
+    
+    // Settings (misal: form ubah profil/password)
+    Route::get('/profile/settings', [ProfileController::class, 'settings'])
+             ->name('profile.settings');
+    Route::post('/profile/settings', [ProfileController::class, 'updateSettings'])
+             ->name('profile.settings.update');
+    Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])
+             ->name('profile.avatar.update');
+});     
