@@ -12,8 +12,8 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Status Tenaga Kerja Anda</h1>
-        <a href="{{ route('tenagakerja.index') }}"
-           class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm">
+        <a href="{{ route('tenagakerja.listrt') }}"
+        class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm">
             Kembali
         </a>
     </div>
