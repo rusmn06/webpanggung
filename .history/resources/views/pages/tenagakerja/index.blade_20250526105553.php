@@ -117,13 +117,14 @@
     <div class="card shadow mb-4">   
         <div class="card-body">
             @if(!$items->isEmpty())
+            {{-- Baris untuk Input Pencarian dan Catatan --}}
             <div class="row mb-3" id="searchRiwayatInputOuterContainer">
                 <div class="col-md-6 col-lg-5">
                     <div class="input-group input-group-sm">
                         <input type="text" id="searchRiwayatInput" class="form-control" placeholder="Cari pengajuan..." aria-label="Cari pengajuan" aria-describedby="searchIcon">
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                <div class="col-md-6 col-lg-7 d-flex align-items-center"> {{-- Kolom untuk catatan --}}
                     <small class="form-text text-muted mt-2 mt-md-0">
                         Tips: Anda bisa mencari berdasarkan ID Pengajuan (misal: Pengajuan-1/2/3), Nama Responden, Asal Daerah(Desa/Kecamatan), atau Status.
                     </small>
@@ -190,7 +191,7 @@
                 </div>
                 @endif
             @endif
-        </div>
+        </div> {{-- End Card Body untuk Riwayat --}}
     </div>
 @endsection
 
@@ -201,6 +202,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const riwayatContainer = document.getElementById('riwayatPengajuanContainer');
     const noResultsMessage = document.getElementById('noResultsMessage');
 
+    // Hanya jalankan skrip pencarian jika elemen inputnya ada (berarti ada item)
     if (searchInput && riwayatContainer) {
         searchInput.addEventListener('keyup', function() {
             const searchTerm = this.value.toLowerCase().trim();

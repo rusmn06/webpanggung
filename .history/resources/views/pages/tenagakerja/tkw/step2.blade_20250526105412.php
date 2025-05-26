@@ -378,13 +378,13 @@
                 const header = form.querySelector('h6');
                 header.textContent = `Anggota Keluarga #${index + 1}`;
                 
-                // Update NUK
+                // Update NUK value if it's empty
                 const nukInput = form.querySelector('input[name="nuk[]"]');
                 if (nukInput && !nukInput.value) {
                    nukInput.value = index + 1;
                 }
 
-                // Update labels
+                // Update labels and i
                 form.querySelectorAll('label, input, select').forEach(el => {
                     if(el.hasAttribute('for')) {
                         el.setAttribute('for', el.getAttribute('for').split('_')[0] + '_' + index);
@@ -404,7 +404,7 @@
 
         container.addEventListener('click', function (e) {
             if (e.target && (e.target.classList.contains('remove-member-btn') || e.target.closest('.remove-member-btn'))) {
-                e.preventDefault(); 
+                e.preventDefault(); // Prevent potential form submission
                 const formToRemove = e.target.closest('.member-form');
                 formToRemove.remove();
                 updateMemberNumbers();

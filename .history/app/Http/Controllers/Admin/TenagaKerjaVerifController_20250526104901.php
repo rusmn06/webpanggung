@@ -53,7 +53,7 @@ class TenagaKerjaVerifController extends Controller
 
         // Set status dan ID admin
         $data['status_validasi'] = 'validated';
-        // $data['admin_id']        = Auth::id(); // Pastikan ada admin_id jika perlu nanti
+        // $data['admin_id']        = Auth::id(); // Pastikan ada admin_id jika perlu
 
         // Update data RumahTangga
         $item->update($data);

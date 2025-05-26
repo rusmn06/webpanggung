@@ -41,7 +41,7 @@ return new class extends Migration
             $table->enum('status_validasi', ['pending','validated','rejected'])->default('pending');
             $table->date('admin_tgl_validasi')->nullable();
             $table->string('admin_nama_kepaladusun', 100)->nullable();
-            $table->string('admin_ttd_pendata')->nullable();
+            $table->string('admin_ttd_pendata')->nullable(); // TTD dari admin/pejabat
 
             $table->unsignedBigInteger('user_id')->nullable();
             // $table->foreign('user_id')->references('id')->on('users')->onDelete('set null'); //relasi user

@@ -18,11 +18,13 @@
     <div class="card shadow-sm mb-4">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-dark">Detail Pengajuan #RT-{{ $item->id }}</h6>
+            {{-- Tombol kembali ke daftar pengajuan user (menggunakan route 'tenagakerja.index') --}}
             <a href="{{ route('tenagakerja.index') }}" class="btn btn-sm btn-outline-secondary">
                  <i class="fas fa-arrow-left fa-sm"></i> Kembali ke Riwayat
             </a>
         </div>
         <div class="card-body">
+            {{-- Menampilkan pesan sukses umum jika ada (opsional karena ada modal) --}}
             @if(session('success_message_body') && !session('show_success_modal'))
                 <div class="alert alert-success">{{ session('success_message_body') }}</div>
             @endif

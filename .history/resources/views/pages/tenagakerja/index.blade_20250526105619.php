@@ -117,6 +117,7 @@
     <div class="card shadow mb-4">   
         <div class="card-body">
             @if(!$items->isEmpty())
+            {{-- Baris untuk Input Pencarian dan Catatan --}}
             <div class="row mb-3" id="searchRiwayatInputOuterContainer">
                 <div class="col-md-6 col-lg-5">
                     <div class="input-group input-group-sm">

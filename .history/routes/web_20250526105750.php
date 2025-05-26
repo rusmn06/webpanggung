@@ -81,14 +81,14 @@ Route::middleware(['auth', 'role:user|admin'])->group(function () {
          // Dashboard user
          Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-        //  // Menu Tenaga Kerja (user-facing)
-        //  Route::get('/tenagakerja',           [UserTenagaKerjaController::class, 'index'])->name('tenagakerja.index');
-        //  Route::get('/tenagakerja/listrt',    [UserTenagaKerjaController::class, 'listrt'])->name('tenagakerja.listrt');
-        //  for ($i = 1; $i <= 24; $i++) {
-        //      Route::get("/tenagakerja/listrt/{$i}", [UserTenagaKerjaController::class, 'rtview'])
-        //           ->name("tenagakerja.listrt.{$i}")
-        //           ->defaults('rt', $i);
-        //  }
+         // Menu Tenaga Kerja (user-facing)
+         Route::get('/tenagakerja',           [UserTenagaKerjaController::class, 'index'])->name('tenagakerja.index');
+         Route::get('/tenagakerja/listrt',    [UserTenagaKerjaController::class, 'listrt'])->name('tenagakerja.listrt');
+         for ($i = 1; $i <= 24; $i++) {
+             Route::get("/tenagakerja/listrt/{$i}", [UserTenagaKerjaController::class, 'rtview'])
+                  ->name("tenagakerja.listrt.{$i}")
+                  ->defaults('rt', $i);
+         }
 
          Route::prefix('kuesioner-tenaga-kerja')->name('tenagakerja.')->group(function () {
                     Route::get('/', [UserTenagaKerjaController::class, 'index'])->name('index');
@@ -114,6 +114,7 @@ Route::middleware(['auth', 'role:user|admin'])->group(function () {
              return view('pages.jamsos.index');
          });
 
+         
          // Route::prefix('jamsos')->name('jss.')->group(…);
 
          // Menu Difabel Rentan

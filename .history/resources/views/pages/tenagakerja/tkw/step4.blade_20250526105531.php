@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     input.addEventListener('change', () => {
         const file = input.files[0];
-        preview.innerHTML = '';
+        preview.innerHTML = ''; // clear preview
 
         if (!file) return;
 

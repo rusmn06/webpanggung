@@ -23,6 +23,7 @@
             </a>
         </div>
         <div class="card-body">
+            {{-- Menampilkan pesan sukses umum jika ada (opsional karena ada modal) --}}
             @if(session('success_message_body') && !session('show_success_modal'))
                 <div class="alert alert-success">{{ session('success_message_body') }}</div>
             @endif
