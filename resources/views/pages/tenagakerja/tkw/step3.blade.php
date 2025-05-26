@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-md-2 mb-3">
                         <label for="jart">Jumlah Anggota Rumah Tangga</label>
-                        <input type="number" name="jart" id="jart" min="0" max="99"
+                        <input type="number" name="jart" id="jart" min="1" max="99"
                             value="{{ old('jart', $data['jart'] ?? '') }}"
                             class="form-control @error('jart') is-invalid @enderror">
                         @error('jart')
@@ -25,7 +25,7 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="jart_ab">Jumlah Anggota Rumah Tangga Aktif Bekerja</label>
-                        <input type="number" name="jart_ab" id="jart_ab" min="0" max="99"
+                        <input type="number" name="jart_ab" id="jart_ab" min="1" max="99"
                             value="{{ old('jart_ab', $data['jart_ab'] ?? '') }}"
                             class="form-control @error('jart_ab') is-invalid @enderror">
                         @error('jart_ab')
@@ -34,7 +34,7 @@
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="jart_tb">Jumlah Anggota Rumah Tangga Tidak / Belum Bekerja</label>
-                        <input type="number" name="jart_tb" id="jart_tb" min="0" max="99"
+                        <input type="number" name="jart_tb" id="jart_tb" min="1" max="99"
                             value="{{ old('jart_tb', $data['jart_tb'] ?? '') }}"
                             class="form-control @error('jart_tb') is-invalid @enderror">
                         @error('jart_tb')
@@ -44,7 +44,7 @@
 
                     <div class="col-md-3 mb-3">
                         <label for="jart_ms">Jumlah Anggota Rumah Tangga Masih Sekolah</label>
-                        <input type="number" name="jart_ms" id="jart_ms" min="0" max="99"
+                        <input type="number" name="jart_ms" id="jart_ms" min="1" max="99"
                             value="{{ old('jart_ms', $data['jart_ms'] ?? '') }}"
                             class="form-control @error('jart_ms') is-invalid @enderror">
                         @error('jart_ms')
