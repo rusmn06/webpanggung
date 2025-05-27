@@ -141,70 +141,70 @@
                 <div class="row" id="riwayatPengajuanContainer">
                     @foreach($items as $item)
                         {{-- Ini adalah satu kartu di dalam @foreach($items as $index => $item) --}}
-                        <div class="col-xl-3 col-lg-6 mb-4 submission-card-wrapper">
-                            <div class="card submission-card shadow-sm h-100">
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    {{-- Judul Kartu dengan Nomor Urut dan Tanggal di bawahnya --}}
-                                    <div>
-                                        <h6 class="m-0 font-weight-bold text-primary card-title-search" style="line-height: 1.2;">
-                                            Pengajuan Ke-{{ $items->firstItem() + $loop->index }}
-                                        </h6>
-                                        <small class="text-muted d-block card-date-search" style="font-size: 0.78rem; font-weight:normal; line-height: 1.2;">
-                                            {{-- PERUBAHAN: Format tahun menjadi YYYY --}}
-                                            {{ \Carbon\Carbon::parse($item->tgl_pembuatan)->isoFormat('D MMMM YYYY') }}
-                                        </small>
-                                    </div>
-                                    @php
-                                        $statusText = $item->status_validasi_text ?? ucfirst($item->status_validasi);
-                                        $badgeClass = 'badge-light text-dark';
-                                        if ($item->status_validasi === 'pending') $badgeClass = 'badge-warning text-dark';
-                                        if ($item->status_validasi === 'validated') $badgeClass = 'badge-success';
-                                        if ($item->status_validasi === 'rejected') $badgeClass = 'badge-danger';
-                                    @endphp
-                                    {{-- PERUBAHAN: Ukuran font badge dan padding sedikit disesuaikan --}}
-                                    <span class="badge {{ $badgeClass }} py-2 px-2 card-status-search" style="font-size: 0.82rem;">{{ $statusText }}</span>
-                                </div>
-                                <div class="card-body px-3 py-3">
-                                    {{-- Baris untuk Nama Responden dan RT/RW --}}
-                                    <div class="row mb-2">
-                                        <div class="col-7 pr-1"> {{-- pr-1 untuk sedikit jarak jika teks panjang --}}
-                                            <span class="card-text-label">Responden:</span>
-                                            <span class="card-respondent-search font-weight-bold card-text-value d-block">{{ $item->nama_responden }}</span>
-                                        </div>
-                                        <div class="col-5 pl-1"> {{-- PERUBAHAN: text-right dihilangkan, pl-1 untuk jarak --}}
-                                            <span class="card-text-label">RT/RW:</span>
-                                            <span class="card-rtrw-search card-text-value d-block">{{ $item->rt }}/{{ $item->rw }}</span>
-                                        </div>
-                                    </div>
+<div class="col-xl-4 col-lg-6 mb-4 submission-card-wrapper">
+    <div class="card submission-card shadow-sm h-100">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            {{-- Judul Kartu dengan Nomor Urut dan Tanggal di bawahnya --}}
+            <div>
+                <h6 class="m-0 font-weight-bold text-primary card-title-search" style="line-height: 1.2;">
+                    Pengajuan Ke-{{ $items->firstItem() + $loop->index }}
+                </h6>
+                <small class="text-muted d-block card-date-search" style="font-size: 0.78rem; font-weight:normal; line-height: 1.2;">
+                    {{-- PERUBAHAN: Format tahun menjadi YYYY --}}
+                    {{ \Carbon\Carbon::parse($item->tgl_pembuatan)->isoFormat('D MMMM YYYY') }}
+                </small>
+            </div>
+            @php
+                $statusText = $item->status_validasi_text ?? ucfirst($item->status_validasi);
+                $badgeClass = 'badge-light text-dark';
+                if ($item->status_validasi === 'pending') $badgeClass = 'badge-warning text-dark';
+                if ($item->status_validasi === 'validated') $badgeClass = 'badge-success';
+                if ($item->status_validasi === 'rejected') $badgeClass = 'badge-danger';
+            @endphp
+            {{-- PERUBAHAN: Ukuran font badge dan padding sedikit disesuaikan --}}
+            <span class="badge {{ $badgeClass }} py-2 px-2 card-status-search" style="font-size: 0.82rem;">{{ $statusText }}</span>
+        </div>
+        <div class="card-body px-3 py-3">
+            {{-- Baris untuk Nama Responden dan RT/RW --}}
+            <div class="row mb-2">
+                <div class="col-7 pr-1"> {{-- pr-1 untuk sedikit jarak jika teks panjang --}}
+                    <span class="card-text-label">Responden:</span>
+                    <span class="card-respondent-search font-weight-bold card-text-value d-block">{{ $item->nama_responden }}</span>
+                </div>
+                <div class="col-5 pl-1"> {{-- PERUBAHAN: text-right dihilangkan, pl-1 untuk jarak --}}
+                    <span class="card-text-label">RT/RW:</span>
+                    <span class="card-rtrw-search card-text-value d-block">{{ $item->rt }}/{{ $item->rw }}</span>
+                </div>
+            </div>
 
-                                    {{-- Asal Daerah --}}
-                                    <div class="mb-2">
-                                        <span class="card-text-label">Asal Daerah:</span>
-                                        <span class="card-location-search card-text-value d-block">
-                                            {{ $item->desa }}, {{ $item->kecamatan }}, {{ $item->kabupaten }}
-                                        </span>
-                                    </div>
-                                    {{-- ID Sistem bisa tetap dikomentari jika tidak ingin ditampilkan di kartu utama --}}
-                                    {{-- <p class="card-text mb-0"><small class="text-muted">ID Sistem: RT-{{ $item->id }}</small></p> --}}
-                                </div>
-                                <div class="card-footer bg-light py-2 px-3 d-flex justify-content-between align-items-center">
-                                    {{-- Kiri: Nama Pendata --}}
-                                    <div>
-                                        <small class="text-muted d-block" style="font-size: 0.75rem; line-height: 1;">Pendata:</small>
-                                        {{-- PERUBAHAN: Ukuran font nama pendata --}}
-                                        <span class="card-pendata-search" style="font-size: 0.9rem; color: #5a5c69;">{{ $item->nama_pendata }}</span>
-                                    </div>
-                                    {{-- Kanan: Tombol Lihat Detail --}}
-                                    <a href="{{ route('tenagakerja.show', $item->id) }}"
-                                    class="btn btn-info btn-sm btn-icon-split">
-                                        <span class="icon text-white-50" style="padding: 0.25rem 0.5rem;">
-                                            <i class="fas fa-eye"></i>
-                                        </span>
-                                        <span class="text" style="padding: 0.25rem 0.5rem;">Detail</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+            {{-- Asal Daerah --}}
+            <div class="mb-2">
+                <span class="card-text-label">Asal Daerah:</span>
+                <span class="card-location-search card-text-value d-block">
+                    {{ $item->desa }}, {{ $item->kecamatan }}, {{ $item->kabupaten }}
+                </span>
+            </div>
+            {{-- ID Sistem bisa tetap dikomentari jika tidak ingin ditampilkan di kartu utama --}}
+            {{-- <p class="card-text mb-0"><small class="text-muted">ID Sistem: RT-{{ $item->id }}</small></p> --}}
+        </div>
+        <div class="card-footer bg-light py-2 px-3 d-flex justify-content-between align-items-center">
+            {{-- Kiri: Nama Pendata --}}
+            <div>
+                <small class="text-muted d-block" style="font-size: 0.75rem; line-height: 1;">Pendata:</small>
+                {{-- PERUBAHAN: Ukuran font nama pendata --}}
+                <span class="card-pendata-search" style="font-size: 0.9rem; color: #5a5c69;">{{ $item->nama_pendata }}</span>
+            </div>
+            {{-- Kanan: Tombol Lihat Detail --}}
+            <a href="{{ route('tenagakerja.show', $item->id) }}"
+               class="btn btn-info btn-sm btn-icon-split">
+                <span class="icon text-white-50" style="padding: 0.25rem 0.5rem;">
+                    <i class="fas fa-eye"></i>
+                </span>
+                <span class="text" style="padding: 0.25rem 0.5rem;">Detail</span>
+            </a>
+        </div>
+    </div>
+</div>
                     @endforeach
                 </div>
                 <div id="noResultsMessage" class="alert alert-warning mt-3" style="display: none;">

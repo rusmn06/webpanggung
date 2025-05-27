@@ -30,7 +30,7 @@ class UserTenagaKerjaController extends Controller
     }
 
     public function show($id)
-    {
+{
     $userId = Auth::id();
     $item = RumahTangga::with('anggotaKeluarga')
                        ->where('user_id', $userId)
@@ -38,8 +38,8 @@ class UserTenagaKerjaController extends Controller
 
     // Tambahan: Hitung nomor urut pengajuan untuk user ini
     $userAllSubmissionIds = RumahTangga::where('user_id', $userId)
-                                       ->orderBy('created_at', 'asc')
-                                       ->pluck('id')
+                                       ->orderBy('created_at', 'asc') // Urutkan berdasarkan tanggal pembuatan
+                                       ->pluck('id')                 // Ambil semua ID pengajuan user ini
                                        ->toArray();
 
     $itemSequenceIndex = array_search($item->id, $userAllSubmissionIds);

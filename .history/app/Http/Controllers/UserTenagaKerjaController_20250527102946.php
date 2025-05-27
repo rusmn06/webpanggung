@@ -30,7 +30,7 @@ class UserTenagaKerjaController extends Controller
     }
 
     public function show($id)
-    {
+{
     $userId = Auth::id();
     $item = RumahTangga::with('anggotaKeluarga')
                        ->where('user_id', $userId)

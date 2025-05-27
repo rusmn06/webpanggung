@@ -18,9 +18,9 @@
     <div class="card shadow-sm mb-4">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-dark">
-                Detail Pengajuan Saya Ke-{{ $item->user_sequence_number }}
-                <small class="text-muted" style="font-size: 0.8rem; font-weight:normal;">(ID Sistem: RT-{{ $item->id }})</small>
-            </h6>
+        Detail Pengajuan Saya Ke-{{ $item->user_sequence_number }}
+        <small class="text-muted" style="font-size: 0.8rem; font-weight:normal;">(ID Sistem: RT-{{ $item->id }})</small>
+    </h6>
             <a href="{{ route('tenagakerja.index') }}" class="btn btn-sm btn-outline-secondary">
                  <i class="fas fa-arrow-left fa-sm"></i> Kembali ke Riwayat
             </a>

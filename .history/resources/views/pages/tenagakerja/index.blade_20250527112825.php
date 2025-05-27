@@ -141,7 +141,7 @@
                 <div class="row" id="riwayatPengajuanContainer">
                     @foreach($items as $item)
                         {{-- Ini adalah satu kartu di dalam @foreach($items as $index => $item) --}}
-                        <div class="col-xl-3 col-lg-6 mb-4 submission-card-wrapper">
+                        <div class="col-xl-2 col-lg-6 mb-4 submission-card-wrapper">
                             <div class="card submission-card shadow-sm h-100">
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     {{-- Judul Kartu dengan Nomor Urut dan Tanggal di bawahnya --}}
