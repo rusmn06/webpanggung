@@ -124,6 +124,7 @@ class UserTenagaKerjaController extends Controller
 
             // Helper function untuk mengisi angka per digit
             $fillNumberPerDigit = function (Worksheet $currentSheet, $numberString, $numDigitsToFill, $startColumn, $row, $padChar = '0') {
+                // ... (Fungsi ini tidak diubah) ...
                 $currentColIndex = Coordinate::columnIndexFromString($startColumn);
                 $paddedNumberString = str_pad((string)$numberString, $numDigitsToFill, $padChar, STR_PAD_LEFT);
                 for ($i = 0; $i < $numDigitsToFill; $i++) {

@@ -87,6 +87,7 @@ class UserTenagaKerjaController extends Controller
 
             // Helper function untuk mengisi string per karakter
             $fillStringPerChar = function (Worksheet $currentSheet, $string, $startColumn, $row, $maxColumnChar = 'AG') {
+                // ... (Fungsi ini tidak diubah) ...
                 $currentColIndex = Coordinate::columnIndexFromString($startColumn);
                 $maxColIndex = Coordinate::columnIndexFromString($maxColumnChar);
                 $words = explode(' ', (string)$string);
@@ -124,6 +125,7 @@ class UserTenagaKerjaController extends Controller
 
             // Helper function untuk mengisi angka per digit
             $fillNumberPerDigit = function (Worksheet $currentSheet, $numberString, $numDigitsToFill, $startColumn, $row, $padChar = '0') {
+                // ... (Fungsi ini tidak diubah) ...
                 $currentColIndex = Coordinate::columnIndexFromString($startColumn);
                 $paddedNumberString = str_pad((string)$numberString, $numDigitsToFill, $padChar, STR_PAD_LEFT);
                 for ($i = 0; $i < $numDigitsToFill; $i++) {
@@ -133,7 +135,8 @@ class UserTenagaKerjaController extends Controller
                 }
             };
 
-            // 1. PENGENALAN TEMPAT
+            // 1. PENGENALAN TEMPAT (Tidak diubah)
+            // ... (Kode ini tidak diubah) ...
             $fillStringPerChar($sheet, strtoupper($rumahTangga->provinsi),  'O', 2, 'AG');
             $fillStringPerChar($sheet, strtoupper($rumahTangga->kabupaten), 'O', 3, 'AG');
             $fillStringPerChar($sheet, strtoupper($rumahTangga->kecamatan), 'O', 4, 'AG');
@@ -143,7 +146,8 @@ class UserTenagaKerjaController extends Controller
             $fillNumberPerDigit($sheet, $rumahTangga->rw, 3, 'S', 6, '0');
 
 
-            // 2. PENDATAAN KETENAGAKERJAAN DI DESA
+            // 2. PENDATAAN KETENAGAKERJAAN DI DESA (Tidak diubah)
+            // ... (Kode ini tidak diubah) ...
             if ($rumahTangga->tgl_pembuatan) {
                 $tglPembuatan = Carbon::parse($rumahTangga->tgl_pembuatan);
                 $fillNumberPerDigit($sheet, $tglPembuatan->format('d'), 2, 'AP', 2);
@@ -153,11 +157,16 @@ class UserTenagaKerjaController extends Controller
             $sheet->setCellValue('AP4', $rumahTangga->nama_pendata); 
             $sheet->setCellValue('AP6', $rumahTangga->nama_responden);
 
-            // Definisikan peta untuk baris setiap anggota keluarga
-            $mainRows = [10, 13, 16, 19, 22, 25, 28, 31, 34];
-            $cadanganRows = [65, 67, 69, 71];
 
-            // Definisikan peta untuk kolom-kolom data
+            // ========================================================================= //
+            // == BAGIAN YANG DIPERBARUI: PENGISIAN DATA ANGGOTA KELUARGA (3 & 4)      == //
+            // ========================================================================= //
+
+            // Definisikan "peta" untuk baris setiap anggota keluarga
+            $mainRows = [10, 13, 16, 19, 22, 25, 28, 31, 34]; // Untuk anggota 1-9
+            $cadanganRows = [65, 67, 69, 71]; // Untuk anggota 10-13
+
+            // Definisikan "peta" untuk kolom-kolom data
             $dataColumns = [
                 'hdkrt'                 => 'X',
                 'nuk'                   => 'AA',
@@ -191,31 +200,41 @@ class UserTenagaKerjaController extends Controller
 
                 // Jika baris ditemukan, isi datanya. Jika tidak, lewati (misal anggota ke-14 dst)
                 if ($namaRow && $infoRow) {
-                    // Isi Nama Anggota
+                    // Isi Nama Anggota (di cell merge D:T)
                     $sheet->setCellValue('D' . $namaRow, $anggota->nama);
 
-                    // Isi NIK
+                    // Isi NIK (dibagi 3 bagian)
                     $nikString = (string)$anggota->nik;
                     if (strlen($nikString) == 16) {
                         $fillNumberPerDigit($sheet, substr($nikString, 0, 6), 6, 'D', $infoRow); // Bagian 1
                         $fillNumberPerDigit($sheet, substr($nikString, 6, 6), 6, 'K', $infoRow); // Bagian 2
                         $fillNumberPerDigit($sheet, substr($nikString, 12, 4), 4, 'R', $infoRow); // Bagian 3
                     }
+
+                    // Isi data lainnya menggunakan peta kolom
                     foreach ($dataColumns as $property => $column) {
                         $sheet->setCellValue($column . $infoRow, $anggota->$property);
                     }
+                    // Khusus kolom AY juga diisi dengan pendapatan
                     $sheet->setCellValue('AY' . $infoRow, $anggota->pendapatan_per_bulan);
                 }
             }
-    
-            // 5. REKAPITULASI
+            
+            // Kolom cadangan lama (sekarang sudah digabung di atas) sengaja saya hapus
+            // agar tidak ada duplikasi atau kesalahan logika.
+
+
+            // 5. REKAPITULASI (Tidak diubah)
+            // ... (Kode ini tidak diubah) ...
             $fillNumberPerDigit($sheet, $rumahTangga->jart, 2, 'N', 50);
             $fillNumberPerDigit($sheet, $rumahTangga->jart_ab, 2, 'N', 51);
             $fillNumberPerDigit($sheet, $rumahTangga->jart_tb, 2, 'N', 52);
             $fillNumberPerDigit($sheet, $rumahTangga->jart_ms, 2, 'N', 53);
-            $sheet->setCellValue('N54', $rumahTangga->jpr2rtp);            
+            $sheet->setCellValue('N54', $rumahTangga->jpr2rtp);
+            
 
-            // 6. VERIFIKASI DAN VALIDASI
+            // 6. VERIFIKASI DAN VALIDASI (Tidak diubah)
+            // ... (Kode ini tidak diubah) ...
             if ($rumahTangga->verif_tgl_pembuatan) {
                 $tglVerifPendata = Carbon::parse($rumahTangga->verif_tgl_pembuatan);
                 $fillNumberPerDigit($sheet, $tglVerifPendata->format('d'), 2, 'T', 52);
@@ -245,17 +264,14 @@ class UserTenagaKerjaController extends Controller
 
             // Proses output file
             $writer = new Xlsx($spreadsheet);
-        
+            
+            // 1. Ambil nama responden dan bersihkan untuk nama file
             $namaResponden = $rumahTangga->nama_responden ?? 'TanpaNama';
-            $namaRespondenClean = preg_replace('/[^\p{L}\p{N}\s_.-]/u', '', $namaResponden);
-            $namaRespondenClean = str_replace(' ', '_', $namaRespondenClean);
+            $namaRespondenClean = preg_replace('/[^A-Za-z0-9_.-]/', '_', $namaResponden);
             $tanggalDownload = now()->format('Y-m-d');
             $namaFile = 'Data_Tenaga_Kerja_' . $namaRespondenClean . '_' . $tanggalDownload . '.xlsx';
-
-            return response()->streamDownload(function () use ($writer) {
-                $writer->save('php://output');
-            }, $namaFile);
-
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            exit;
         } catch (\PhpOffice\PhpSpreadsheet\Exception $e) {
             \Illuminate\Support\Facades\Log::error("PhpSpreadsheet Exception in exportExcel: " . $e->getMessage() . "\n" . $e->getTraceAsString());
             return redirect()->back()->with('error', 'Gagal membuat file Excel (PhpSpreadsheet): ' . $e->getMessage());

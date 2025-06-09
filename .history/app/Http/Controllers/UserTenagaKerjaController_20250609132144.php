@@ -87,6 +87,7 @@ class UserTenagaKerjaController extends Controller
 
             // Helper function untuk mengisi string per karakter
             $fillStringPerChar = function (Worksheet $currentSheet, $string, $startColumn, $row, $maxColumnChar = 'AG') {
+                // ... (Fungsi ini tidak diubah) ...
                 $currentColIndex = Coordinate::columnIndexFromString($startColumn);
                 $maxColIndex = Coordinate::columnIndexFromString($maxColumnChar);
                 $words = explode(' ', (string)$string);
@@ -124,6 +125,7 @@ class UserTenagaKerjaController extends Controller
 
             // Helper function untuk mengisi angka per digit
             $fillNumberPerDigit = function (Worksheet $currentSheet, $numberString, $numDigitsToFill, $startColumn, $row, $padChar = '0') {
+                // ... (Fungsi ini tidak diubah) ...
                 $currentColIndex = Coordinate::columnIndexFromString($startColumn);
                 $paddedNumberString = str_pad((string)$numberString, $numDigitsToFill, $padChar, STR_PAD_LEFT);
                 for ($i = 0; $i < $numDigitsToFill; $i++) {
@@ -133,7 +135,7 @@ class UserTenagaKerjaController extends Controller
                 }
             };
 
-            // 1. PENGENALAN TEMPAT
+            // 1. PENGENALAN TEMPAT (Tidak diubah)
             $fillStringPerChar($sheet, strtoupper($rumahTangga->provinsi),  'O', 2, 'AG');
             $fillStringPerChar($sheet, strtoupper($rumahTangga->kabupaten), 'O', 3, 'AG');
             $fillStringPerChar($sheet, strtoupper($rumahTangga->kecamatan), 'O', 4, 'AG');
@@ -143,7 +145,7 @@ class UserTenagaKerjaController extends Controller
             $fillNumberPerDigit($sheet, $rumahTangga->rw, 3, 'S', 6, '0');
 
 
-            // 2. PENDATAAN KETENAGAKERJAAN DI DESA
+            // 2. PENDATAAN KETENAGAKERJAAN DI DESA (Tidak diubah)
             if ($rumahTangga->tgl_pembuatan) {
                 $tglPembuatan = Carbon::parse($rumahTangga->tgl_pembuatan);
                 $fillNumberPerDigit($sheet, $tglPembuatan->format('d'), 2, 'AP', 2);
@@ -153,11 +155,16 @@ class UserTenagaKerjaController extends Controller
             $sheet->setCellValue('AP4', $rumahTangga->nama_pendata); 
             $sheet->setCellValue('AP6', $rumahTangga->nama_responden);
 
-            // Definisikan peta untuk baris setiap anggota keluarga
-            $mainRows = [10, 13, 16, 19, 22, 25, 28, 31, 34];
-            $cadanganRows = [65, 67, 69, 71];
 
-            // Definisikan peta untuk kolom-kolom data
+            // ========================================================================= //
+            // == BAGIAN YANG DIPERBARUI: PENGISIAN DATA ANGGOTA KELUARGA (3 & 4)      == //
+            // ========================================================================= //
+
+            // Definisikan petuntuk baris setiap anggota keluarga
+            $mainRows = [10, 13, 16, 19, 22, 25, 28, 31, 34]; // Untuk anggota 1-9
+            $cadanganRows = [65, 67, 69, 71]; // Untuk anggota 10-13
+
+            // Definisikan petuntuk kolom-kolom data
             $dataColumns = [
                 'hdkrt'                 => 'X',
                 'nuk'                   => 'AA',
@@ -208,14 +215,14 @@ class UserTenagaKerjaController extends Controller
                 }
             }
     
-            // 5. REKAPITULASI
+            // 5. REKAPITULASI (Tidak diubah)
             $fillNumberPerDigit($sheet, $rumahTangga->jart, 2, 'N', 50);
             $fillNumberPerDigit($sheet, $rumahTangga->jart_ab, 2, 'N', 51);
             $fillNumberPerDigit($sheet, $rumahTangga->jart_tb, 2, 'N', 52);
             $fillNumberPerDigit($sheet, $rumahTangga->jart_ms, 2, 'N', 53);
             $sheet->setCellValue('N54', $rumahTangga->jpr2rtp);            
 
-            // 6. VERIFIKASI DAN VALIDASI
+            // 6. VERIFIKASI DAN VALIDASI (Tidak diubah)
             if ($rumahTangga->verif_tgl_pembuatan) {
                 $tglVerifPendata = Carbon::parse($rumahTangga->verif_tgl_pembuatan);
                 $fillNumberPerDigit($sheet, $tglVerifPendata->format('d'), 2, 'T', 52);
