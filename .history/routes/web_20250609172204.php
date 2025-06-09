@@ -57,7 +57,6 @@ Route::prefix('admin')
                 Route::get('/rt/{rt}',       [TenagaKerjaVerifController::class, 'showRtData'])->name('showrt')->where('rt', '[0-9]+');
 
                 Route::get('/detail/{id}',   [TenagaKerjaVerifController::class, 'showHouseholdDetail'])->name('detail');
-                Route::get('/export-excel/{id}', [TenagaKerjaVerifController::class, 'exportExcel'])->name('exportExcel');
 
                 Route::get('/{id}',          [TenagaKerjaVerifController::class, 'show'])->name('show');
                 Route::post('/{id}/approve', [TenagaKerjaVerifController::class, 'approve'])->name('approve');

@@ -1,10 +1,10 @@
-@extends('layouts.main') {{-- PERUBAHAN: Disesuaikan kembali dengan nama layout Anda --}}
+@extends('layouts.app') {{-- Pastikan ini nama layout utama Anda --}}
 
 @section('title', 'Pilih RT')
 
 @push('styles')
 <style>
-    /* CSS Kustom Anda yang sudah bagus tidak diubah */
+    /* ... CSS Kustom Anda yang sudah bagus tidak perlu diubah ... */
     .rt-link { text-decoration: none !important; color: inherit; }
     .rt-link:hover { text-decoration: none !important; color: inherit; }
     .rt-card-simple { background-color: #fff; border: 1px solid #e3e6f0; border-radius: .35rem; transition: transform 0.15s ease, box-shadow 0.15s ease, border-left-color 0.15s ease; border-left: 4px solid #dddfeb; overflow: hidden; }
@@ -27,7 +27,6 @@
 
     <div class="card shadow mb-4">
         <div class="card-body">
-
             <div class="row mb-3 align-items-center">
                 <div class="col-md-6 text-muted" id="rt-info">
                     {{-- Teks ini akan diisi oleh JavaScript --}}
@@ -40,12 +39,14 @@
 
             {{-- Container untuk kartu-kartu RT --}}
             <div class="row" id="rt-card-container">
+                {{-- Kita tetap menggunakan @for loop dari kode asli Anda --}}
                 @for ($i = 1; $i <= 24; $i++)
                     @php
                         $rtNumber = str_pad($i, 3, '0', STR_PAD_LEFT);
                         $totalRT = $rumahTanggaCounts[$i] ?? 0;
                         $totalAnggota = $anggotaCounts[$i] ?? 0;
                     @endphp
+                    {{-- Kita tambahkan class 'rt-card-item' untuk target JavaScript --}}
                     <div class="col-lg-4 col-md-6 mb-4 rt-card-item">
                         <a href="{{ route('admin.tkw.showrt', ['rt' => $i]) }}" class="rt-link">
                             <div class="card rt-card-simple h-100 shadow-sm">
@@ -54,6 +55,7 @@
                                         <i class="fas fa-map-marker-alt"></i>
                                     </div>
                                     <div class="text-area">
+                                        {{-- Kita tambahkan data-rt-number untuk memudahkan pencarian --}}
                                         <h6 data-rt-number="{{ $rtNumber }}">RT {{ $rtNumber }}</h6>
                                         <span class="btn btn-outline-primary btn-sm">Lihat Data</span>
                                         <div class="rt-preview-data mt-2">
@@ -67,7 +69,6 @@
                     </div>
                 @endfor
             </div>
-            <hr class="mt-0">
 
             <nav>
                 <ul class="pagination justify-content-center" id="rt-pagination">
@@ -95,14 +96,17 @@
             const startIndex = (page - 1) * itemsPerPage;
             const endIndex = startIndex + itemsPerPage;
 
+            // Tampilkan kartu untuk halaman yang aktif, sembunyikan yang lain
             rtCards.forEach((card, index) => {
                 card.style.display = (index >= startIndex && index < endIndex) ? '' : 'none';
             });
 
+            // Update info halaman
             const firstItem = startIndex + 1;
             const lastItem = Math.min(endIndex, rtCards.length);
             infoContainer.textContent = `Menampilkan ${firstItem} sampai ${lastItem} dari ${rtCards.length} total RT.`;
 
+            // Update tombol pagination
             document.querySelectorAll('.page-item').forEach(item => {
                 item.classList.remove('active');
             });
@@ -113,7 +117,7 @@
         }
 
         function setupPagination() {
-            paginationContainer.innerHTML = '';
+            paginationContainer.innerHTML = ''; // Kosongkan pagination
             for (let i = 1; i <= totalPages; i++) {
                 const li = document.createElement('li');
                 li.className = 'page-item';
@@ -136,13 +140,16 @@
             const searchTerm = this.value.toLowerCase();
 
             if (searchTerm.length > 0) {
+                // Sembunyikan pagination dan info saat mencari
                 paginationContainer.style.display = 'none';
                 infoContainer.textContent = '';
             } else {
+                // Tampilkan kembali pagination dan info saat pencarian kosong
                 paginationContainer.style.display = '';
-                showPage(1);
+                showPage(1); // Kembali ke halaman 1
             }
             
+            // Filter kartu berdasarkan pencarian
             rtCards.forEach(card => {
                 const rtNumber = card.querySelector('[data-rt-number]').dataset.rtNumber;
                 if (rtNumber.includes(searchTerm)) {

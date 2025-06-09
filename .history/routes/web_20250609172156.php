@@ -56,9 +56,10 @@ Route::prefix('admin')
                 Route::get('/list-rt',       [TenagaKerjaVerifController::class, 'listRtPage'])->name('listrt');
                 Route::get('/rt/{rt}',       [TenagaKerjaVerifController::class, 'showRtData'])->name('showrt')->where('rt', '[0-9]+');
 
+                // TAMBAHKAN ROUTE BARU DI SINI
                 Route::get('/detail/{id}',   [TenagaKerjaVerifController::class, 'showHouseholdDetail'])->name('detail');
-                Route::get('/export-excel/{id}', [TenagaKerjaVerifController::class, 'exportExcel'])->name('exportExcel');
 
+                // Route lama untuk halaman verifikasi biarkan saja
                 Route::get('/{id}',          [TenagaKerjaVerifController::class, 'show'])->name('show');
                 Route::post('/{id}/approve', [TenagaKerjaVerifController::class, 'approve'])->name('approve');
                 Route::post('/{id}/reject',  [TenagaKerjaVerifController::class, 'reject'])->name('reject');

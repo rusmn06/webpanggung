@@ -101,7 +101,7 @@
                             <small class="text-muted d-block" style="font-size: 0.75rem; line-height: 1;">Pendata:</small>
                             <span style="font-size: 0.9rem; color: #5a5c69;">{{ $rumahTangga->nama_pendata }}</span>
                         </div>
-                        <a href="{{ route('admin.tkw.detail', $rumahTangga->id) }}"
+                        <a href="{{ route('admin.tkw.show', $rumahTangga->id) }}"
                            class="btn btn-info btn-sm btn-icon-split">
                             <span class="icon text-white-50" style="padding: 0.25rem 0.5rem;"><i class="fas fa-search"></i></span>
                             <span class="text" style="padding: 0.25rem 0.5rem;">Lihat Detail</span>

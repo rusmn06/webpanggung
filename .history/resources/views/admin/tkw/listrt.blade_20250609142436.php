@@ -67,7 +67,6 @@
                     </div>
                 @endfor
             </div>
-            <hr class="mt-0">
 
             <nav>
                 <ul class="pagination justify-content-center" id="rt-pagination">
