@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.app')
 
 @section('title', 'Verifikasi Pengajuan: ' . $item->nama_responden)
 
