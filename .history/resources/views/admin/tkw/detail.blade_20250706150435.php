@@ -198,24 +198,24 @@
                         Anda dapat mengunduh data pengajuan ini dalam format Excel. Jika pengajuan belum disetujui, Anda masih dapat mengubahnya.
                     </p>
                     <div class="mt-auto d-flex" style="gap: 0.5rem;">
-                        <a href="{{ route('admin.tkw.exportExcel', $item->id) }}" class="btn btn-success btn-icon-split">
-                            <span class="icon text-white-50"><i class="fas fa-download"></i></span>
-                            <span class="text">Export</span>
-                        </a>
-                        <a href="{{ route('admin.tkw.edit', $item->id) }}" class="btn btn-warning btn-icon-split">
-                            <span class="icon text-white-50"><i class="fas fa-edit"></i></span>
-                            <span class="text">Edit Data</span>
-                        </a>
-                        
-                        <form action="{{ route('admin.tkw.destroy', $item->id) }}" method="POST" class="delete-form" style="margin: 0;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-icon-split">
-                                <span class="icon text-white-50"><i class="fas fa-trash"></i></span>
-                                <span class="text">Hapus</span>
-                            </button>
-                        </form>
-                    </div>
+    <a href="{{ route('admin.tkw.exportExcel', $item->id) }}" class="btn btn-success btn-icon-split">
+        <span class="icon text-white-50"><i class="fas fa-download"></i></span>
+        <span class="text">Export</span>
+    </a>
+    <a href="{{ route('admin.tkw.edit', $item->id) }}" class="btn btn-warning btn-icon-split">
+        <span class="icon text-white-50"><i class="fas fa-edit"></i></span>
+        <span class="text">Edit Data</span>
+    </a>
+    
+    <form action="{{ route('admin.tkw.destroy', $item->id) }}" method="POST" class="delete-form" style="margin: 0;">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-danger btn-icon-split">
+            <span class="icon text-white-50"><i class="fas fa-trash"></i></span>
+            <span class="text">Hapus</span>
+        </button>
+    </form>
+</div>
                 </div>
             </div>
         </div>

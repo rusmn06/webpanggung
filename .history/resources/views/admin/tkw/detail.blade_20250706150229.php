@@ -206,11 +206,14 @@
                             <span class="icon text-white-50"><i class="fas fa-edit"></i></span>
                             <span class="text">Edit Data</span>
                         </a>
-                        
-                        <form action="{{ route('admin.tkw.destroy', $item->id) }}" method="POST" class="delete-form" style="margin: 0;">
+                        <form id="delete-form-{{ $item->id }}" action="{{ route('admin.tkw.destroy', $item->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-icon-split">
+                            
+                            <button type="button" class="btn btn-danger btn-sm btn-icon-split delete-trigger-btn" 
+                                    data-toggle="modal" 
+                                    data-target="#deleteConfirmationModal"
+                                    data-form-id="delete-form-{{ $item->id }}">
                                 <span class="icon text-white-50"><i class="fas fa-trash"></i></span>
                                 <span class="text">Hapus</span>
                             </button>

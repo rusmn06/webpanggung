@@ -206,13 +206,12 @@
                             <span class="icon text-white-50"><i class="fas fa-edit"></i></span>
                             <span class="text">Edit Data</span>
                         </a>
-                        
-                        <form action="{{ route('admin.tkw.destroy', $item->id) }}" method="POST" class="delete-form" style="margin: 0;">
+                        <form action="{{ route('admin.tkw.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini secara permanen?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-icon-split">
                                 <span class="icon text-white-50"><i class="fas fa-trash"></i></span>
-                                <span class="text">Hapus</span>
+                                <span class="text">Hapus Data</span>
                             </button>
                         </form>
                     </div>
@@ -345,42 +344,3 @@
     </div>
 </div>
 @endsection
-
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    let formIdToDelete = null;
-
-    // 1. Saat tombol hapus (pemicu) di-klik
-    document.body.addEventListener('click', function(e) {
-        if (e.target.closest('.delete-trigger-btn')) {
-            const button = e.target.closest('.delete-trigger-btn');
-            // Simpan ID form dari atribut data-* tombol
-            formIdToDelete = button.getAttribute('data-form-id');
-        }
-    });
-
-    // 2. Saat tombol 'Ya, Hapus Data' di dalam modal di-klik
-    const confirmButton = document.getElementById('confirm-delete-button');
-    if(confirmButton) {
-        confirmButton.addEventListener('click', function() {
-            if (formIdToDelete) {
-                const form = document.getElementById(formIdToDelete);
-                if (form) {
-                    // Submit form yang ID-nya sudah kita simpan
-                    form.submit();
-                }
-            }
-        });
-    }
-
-    // 3. Bersihkan ID form saat modal ditutup (opsional, tapi praktik yang baik)
-    const deleteModal = document.getElementById('deleteConfirmationModal');
-    if(deleteModal) {
-        deleteModal.addEventListener('hidden.bs.modal', function () {
-            formIdToDelete = null;
-        });
-    }
-});
-</script>
-@endpush

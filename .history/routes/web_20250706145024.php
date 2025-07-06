@@ -65,7 +65,8 @@ Route::prefix('admin')
 
                 Route::get('/{id}/edit', [TenagaKerjaVerifController::class, 'edit'])->name('edit');
                 Route::put('/{id}/update', [TenagaKerjaVerifController::class, 'update'])->name('update'); 
-                Route::delete('/{id}', [TenagaKerjaVerifController::class, 'destroy'])->name('destroy'); 
+                
+                
             });
 
         // User
